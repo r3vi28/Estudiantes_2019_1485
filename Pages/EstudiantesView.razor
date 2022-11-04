@@ -1,0 +1,75 @@
+@page "/estudiantes"
+
+@using Data.models
+
+<PageTitle>Estudiantes</PageTitle>
+<h1>Estudiantes</h1>
+<h1>Productos</h1>
+<label for="txtNombres">Nombres:</label>
+<input @bind="EstudianteSeleccionado!.Nombres" type="text" name="txtNombres" id="txtNombres">
+<label for="txtApellidos">Apellidos:</label>
+<input @bind="EstudianteSeleccionado!.Apellidos" type="text" name="txtApellidos" id="txtApellidos">
+<label for="txtFechaNacimiento">Fecha de Nacimiento:</label>
+<input @bind="EstudianteSeleccionado!.FechaNacimiento" type="text" name="txtfechaNacimiento" id="txtFechaNacimiento">
+<label for="txtMatricula">Matricula:</label>
+<input @bind="EstudianteSeleccionado!.Matricula" type="text" name="txtMatricula" id="txtMatricula">
+<label for="txtFCarrera">Carrera:</label>
+<input @bind="EstudianteSeleccionado!.Carrera" type="text" name="txtCarrera" id="txtCarrera">
+<div class="mt-3"></div>
+<button class='btn @(EstudianteSeleccionado!.EstudianteID==0?"btn-success":"btn-warning")'>
+    <span class='oi @(EstudianteSeleccionado!.EstudianteID==0?"oi-plus":"oi-pencil")'></span>
+</button>
+<div class="mt-3"></div>
+<table class="table">
+    <thead>
+        <tr>            
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Fecha de nacimiento</th>
+            <th>Matricula</th>
+            <th>Carrera</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+     @if(Estudiantes!=null){
+            @foreach (var estudiante in Estudiantes)
+        {
+            <tr>
+                <td>@estudiante.EstudianteID</td>
+                <td>@estudiante.Nombres</td>
+                <td>@estudiante.Apellidos</td>
+                <td>@estudiante.FechaNacimiento</td>
+                <td>@estudiante.Matricula</td>
+                <td>@estudiante.Carrera</td>
+                <td>
+                    <div class="btn-group">
+                        <button>Editar</button>
+                        <button>Eliminar</button>
+                    </div>
+                </td>
+            </tr>
+        }
+        }
+    </tbody>
+</table>
+
+@code {
+    public List<Estudiante>? Estudiantes { get; set; }
+    = new List<Estudiante>(){
+new Estudiante{
+    EstudianteID = 1,
+    Nombres = "Moises Javier",
+    Apellidos = "Revi",
+    FechaNacimiento = "28/08/2001",
+    Matricula = "2019-1485",
+    Carrera = "Informatica"
+}
+    };
+    void Editar(int Id)
+    {
+        EstudianteSeleccionado = Estudiantes!.FirstOrDefault(e => e.EstudianteID == Id) ?? new Estudiante();
+    }
+    public Estudiante? EstudianteSeleccionado { get; set; } = new Estudiante();
+}
