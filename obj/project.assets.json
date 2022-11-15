@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\LP\\Estudiantes_2019_1485\\Estudiantes_2019_1485.csproj",
+      "projectUniqueName": "C:\\WorkSpace\\LP\\Estudiantes_2019_1485\\Estudiantes_2019_1485.csproj",
       "projectName": "Estudiantes_2019_1485",
-      "projectPath": "C:\\LP\\Estudiantes_2019_1485\\Estudiantes_2019_1485.csproj",
+      "projectPath": "C:\\WorkSpace\\LP\\Estudiantes_2019_1485\\Estudiantes_2019_1485.csproj",
       "packagesPath": "C:\\Users\\moise\\.nuget\\packages\\",
-      "outputPath": "C:\\LP\\Estudiantes_2019_1485\\obj\\",
+      "outputPath": "C:\\WorkSpace\\LP\\Estudiantes_2019_1485\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\moise\\AppData\\Roaming\\NuGet\\NuGet.Config",

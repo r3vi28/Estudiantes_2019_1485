@@ -25,3 +25,6 @@ C:\LP\Estudiantes_2019_1485\obj\Debug\net6.0\refint\Estudiantes_2019_1485.dll
 C:\LP\Estudiantes_2019_1485\obj\Debug\net6.0\Estudiantes_2019_1485.pdb
 C:\LP\Estudiantes_2019_1485\obj\Debug\net6.0\Estudiantes_2019_1485.genruntimeconfig.cache
 C:\LP\Estudiantes_2019_1485\obj\Debug\net6.0\ref\Estudiantes_2019_1485.dll
+C:\WorkSpace\LP\Estudiantes_2019_1485\obj\Debug\net6.0\Estudiantes_2019_1485.dll
+C:\WorkSpace\LP\Estudiantes_2019_1485\obj\Debug\net6.0\refint\Estudiantes_2019_1485.dll
+C:\WorkSpace\LP\Estudiantes_2019_1485\obj\Debug\net6.0\Estudiantes_2019_1485.pdb
