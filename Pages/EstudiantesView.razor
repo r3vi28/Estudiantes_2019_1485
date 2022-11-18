@@ -3,73 +3,107 @@
 @using Data.models
 
 <PageTitle>Estudiantes</PageTitle>
-<h1>Estudiantes</h1>
-<h1>Productos</h1>
-<label for="txtNombres">Nombres:</label>
-<input @bind="EstudianteSeleccionado!.Nombres" type="text" name="txtNombres" id="txtNombres">
-<label for="txtApellidos">Apellidos:</label>
-<input @bind="EstudianteSeleccionado!.Apellidos" type="text" name="txtApellidos" id="txtApellidos">
-<label for="txtFechaNacimiento">Fecha de Nacimiento:</label>
-<input @bind="EstudianteSeleccionado!.FechaNacimiento" type="text" name="txtfechaNacimiento" id="txtFechaNacimiento">
-<label for="txtMatricula">Matricula:</label>
-<input @bind="EstudianteSeleccionado!.Matricula" type="text" name="txtMatricula" id="txtMatricula">
-<label for="txtFCarrera">Carrera:</label>
-<input @bind="EstudianteSeleccionado!.Carrera" type="text" name="txtCarrera" id="txtCarrera">
-<div class="mt-3"></div>
-<button class='btn @(EstudianteSeleccionado!.EstudianteID==0?"btn-success":"btn-warning")'>
-    <span class='oi @(EstudianteSeleccionado!.EstudianteID==0?"oi-plus":"oi-pencil")'></span>
-</button>
-<div class="mt-3"></div>
-<table class="table">
-    <thead>
-        <tr>            
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellidos</th>
-            <th>Fecha de nacimiento</th>
-            <th>Matricula</th>
-            <th>Carrera</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-     @if(Estudiantes!=null){
-            @foreach (var estudiante in Estudiantes)
-        {
-            <tr>
-                <td>@estudiante.EstudianteID</td>
-                <td>@estudiante.Nombres</td>
-                <td>@estudiante.Apellidos</td>
-                <td>@estudiante.FechaNacimiento</td>
-                <td>@estudiante.Matricula</td>
-                <td>@estudiante.Carrera</td>
-                <td>
-                    <div class="btn-group">
-                        <button>Editar</button>
-                        <button>Eliminar</button>
-                    </div>
-                </td>
-            </tr>
-        }
-        }
-    </tbody>
-</table>
+<h3>Estudiantes</h3>
+<div class="mb-3 row">
+    <div class="col-6">
+        <label for="txtNombres">Nombres: </label>
+        <input @bind="@Nombres" placeholder="Escriba su nombre" class="form-control" type="text" name="txtNombres" id="txtNombres">
+    </div> 
+    <div class="col-6">
+        <label for="txtApellido">Apellidos: </label>
+        <input @bind="@Apellidos" placeholder="Escriba su apellido" class="form-control" type="text" name="txtApellido" id="txtApellido">
+    </div> 
+</div>
+<div class="row mb-3">
+    <label for="txtFN">Fecha de nacimiento: </label>
+    <input @bind="@FechaNacimiento" class="form-control @FechaNacIsValid()" type="date" name="txtFN" id="txtFN" maxlength="9">
+</div>
+<div class="mb-3 row">
+    <div class="col-4">
+        <label for="txtMatricula">Matrícula: </label>
+        <input @bind="@Matricula" placeholder="2019-1485" class="form-control" type="text" name="txtMatricula" id="txtMatricula" maxlength="9">
+    </div>
+    <div class="col-8">
+        <label for="cbCarreras">Carrera: </label>
+        <select class="form-select" @bind="CarreraId" name="cbCarreras" id="cbCarreras">
+            @foreach (var carrera in Carreras)
+            {
+                <option value="@carrera.Id">@carrera.Nombre</option>
+            }
+        </select>
+    </div>
+</div>
 
-@code {
-    public List<Estudiante>? Estudiantes { get; set; }
-    = new List<Estudiante>(){
-new Estudiante{
-    EstudianteID = 1,
-    Nombres = "Moises Javier",
-    Apellidos = "Revi",
-    FechaNacimiento = "28/08/2001",
-    Matricula = "2019-1485",
-    Carrera = "Informatica"
-}
-    };
-    void Editar(int Id)
-    {
-        EstudianteSeleccionado = Estudiantes!.FirstOrDefault(e => e.EstudianteID == Id) ?? new Estudiante();
+<div class="mb-3 row">
+    <div class="btn-group">
+        <button @onclick="Agregar" type="button" class="btn btn-success">Agregar</button>
+        <button type="button" class="btn btn-warning">Limpiar</button>
+        <button type="button" class="btn btn-danger">Eliminar</button>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Matricula</th>
+                <th>Carrera</th>
+                <th>Fecha Nacimiento</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var estudiante in Estudiantes)
+            {
+                <tr>
+                    <th>@estudiante.NombreCompleto</th>
+                    <th>@estudiante.Matricula</th>
+                    <th>@estudiante.Carrera!.Nombre</th>
+                    <th>@estudiante.FechaNacimiento.ToString("dd/MM/yyyy")</th>
+                </tr>
+            }
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+
+
+@code{
+    public int EstudianteID  {get; set;}
+    public string Nombres  {get; set;} = null!;
+    public string Apellidos  {get; set;}= null!;
+    public DateTime FechaNacimiento   {get; set;}
+    public string Matricula {get; set;}= null!;
+    public int CarreraId {get; set;}
+    public List<Carrera> Carreras { get; set; } = null!;
+    public List<Estudiante> Estudiantes { get; set; } = null!;
+
+        protected override Task OnInitializedAsync()
+        {
+            Estudiantes = new List<Estudiante>();
+            Carreras = new List<Carrera>()
+                {
+                    new Carrera(){ Id =1, Nombre = "Informática" },
+                    new Carrera(){ Id =2, Nombre = "Derecho" },
+                    new Carrera(){ Id =3, Nombre = "Biologia y Quimica" },
+                    new Carrera(){ Id =4, Nombre = "Contabilidad" },
+                };
+            return base.OnInitializedAsync();
+        }
+    Carrera BuscarCarrera(){
+        return Carreras.FirstOrDefault(c=>c.Id == CarreraId)!;
+    } 
+    private void Agregar(){
+        Estudiantes.Add(new Estudiante(){
+            EstudianteID = 0,
+            Nombres = Nombres,
+            Apellidos = Apellidos,
+            Matricula = Matricula,
+            FechaNacimiento = FechaNacimiento,
+            Carrera = BuscarCarrera(),
+            CarreraId = CarreraId
+            });
     }
-    public Estudiante? EstudianteSeleccionado { get; set; } = new Estudiante();
+
+    private string FechaNacIsValid() =>  FechaNacimiento>DateTime.Now ? "is-invalid":"";
 }
