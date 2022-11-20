@@ -3,11 +3,12 @@
 @using Data.models
 
 <PageTitle>Estudiantes</PageTitle>
-<h3>Estudiantes</h3>
+<div style="border: solid 1px #ddd; background-color: GhostWhite; border-radius: 5px; padding: 13px;">
+    <h3>Estudiantes</h3>
 <div class="mb-3 row">
     <div class="col-6">
         <label for="txtNombres">Nombres: </label>
-        <input @bind="@Nombres" placeholder="Escriba su nombre" class="form-control" type="text" name="txtNombres" id="txtNombres">
+        <input @bind="@Nombres" placeholder="Escriba su nombre" class="form-control" type="text" name="txtNombres" id="txtNombres" >
     </div> 
     <div class="col-6">
         <label for="txtApellido">Apellidos: </label>
@@ -16,7 +17,7 @@
 </div>
 <div class="row mb-3">
     <label for="txtFN">Fecha de nacimiento: </label>
-    <input @bind="@FechaNacimiento" class="form-control @FechaNacIsValid()" type="date" name="txtFN" id="txtFN" maxlength="9">
+    <input @bind="@FechaNacimiento" class="form-control @FechaNacIsValid()" type="date" name="txtFN" id="txtFN" maxlength="9" style="margin-left: 10px;">
 </div>
 <div class="mb-3 row">
     <div class="col-4">
@@ -40,6 +41,7 @@
         <button type="button" class="btn btn-warning">Limpiar</button>
         <button type="button" class="btn btn-danger">Eliminar</button>
     </div>
+</div>
 </div>
 
 <div class="container">
