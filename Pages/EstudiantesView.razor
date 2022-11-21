@@ -3,7 +3,7 @@
 @using Data.models
 
 <PageTitle>Estudiantes</PageTitle>
-<div style="border: solid 1px #ddd; background-color: GhostWhite; border-radius: 5px; padding: 13px;">
+<div class="container" style="border: solid 1px #ddd; background-color: GhostWhite; border-radius: 5px; padding: 13px;">
     <h3>Estudiantes</h3>
 <div class="mb-3 row">
     <div class="col-6">
@@ -17,7 +17,7 @@
 </div>
 <div class="row mb-3">
     <label for="txtFN">Fecha de nacimiento: </label>
-    <input @bind="@FechaNacimiento" class="form-control @FechaNacIsValid()" type="date" name="txtFN" id="txtFN" maxlength="9" style="margin-left: 10px;">
+    <input @bind="@FechaNacimiento" class="form-control @FechaNacIsValid()" type="date" name="txtFN" id="txtFN" maxlength="9" style="margin-left: 10px; width: calc(100% - 25px);">
 </div>
 <div class="mb-3 row">
     <div class="col-4">
