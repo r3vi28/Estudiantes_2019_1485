@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Estudiantes_2019_1485.Data;
-using Estudiantes.Data.Context;
+using Estudiantes_2019_1485.Data.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
